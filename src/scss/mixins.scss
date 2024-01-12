@@ -1,0 +1,90 @@
+@mixin clickPulse {
+  transition: transform .3s;
+  animation: pulse 500ms;
+  &:hover {
+    transform: scale(1.02);
+  }
+  &:active {
+    transform: scale(.95);
+    animation: none;
+  }
+}
+
+@keyframes pulse {
+  from {
+    box-shadow: var(--color-grayscale-c5) 0 0 0;
+  }
+  to {
+    box-shadow: transparent 0 0 0 12px;
+  }
+
+}
+
+@mixin verticalScroll {
+  ::-webkit-scrollbar {
+    width: 10px;
+  }
+
+  /* Track */
+  ::-webkit-scrollbar-track {
+    background: #F4F5F6;
+  }
+
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: #B1B5C3;
+    border-radius: 4px;
+  }
+
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: #555;
+  }
+}
+@mixin sliderDotsStyle {
+  bottom: 12px;
+  $size: 16px * 1.2;
+  $size-active: $size;
+
+  li {
+    margin: 0;
+    width: $size;
+    height: $size;
+    line-height: $size;
+
+    button {
+      width: $size;
+      height: $size;
+      line-height: $size;
+      padding: $size / 4;
+
+      &::before {
+        width: $size / 2;
+        height: $size / 2;
+        line-height: $size / 2;
+        font-size: $size / 2;
+        padding: $size / 4;
+        color: $color-white !important;
+      }
+    }
+  }
+
+  :global(li.slick-active) {
+    width: $size-active;
+    height: $size-active;
+    line-height: $size-active;
+
+    button {
+      width: $size-active;
+      height: $size-active;
+      line-height: $size-active;
+
+      &::before {
+        width: $size-active / 2;
+        height: $size-active / 2;
+        line-height: $size-active / 2;
+        font-size: $size-active / 2;
+      }
+    }
+  }
+}

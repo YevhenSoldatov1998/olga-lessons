@@ -1,0 +1,167 @@
+// COLORS
+
+$color-dark: #001524;
+$color-blue: #15616d;
+$color-white: #fff;
+$color-light: #ffecd1;
+$color-orange: #ff7d00;
+$color-brown: #78290f;
+$color-disabled: rgb(221, 221, 221);
+$color-red: #c13515;
+
+// Screen sizes
+$breakpoint-desktop: 1440px;
+$breakpoint-laptop: 1280px;
+$breakpoint-ipad: 1024px;
+$breakpoint-tablet: 768px;
+$breakpoint-phone: 576px;
+
+// heights
+$header-height: 80px;
+
+// Shadows
+$paper-shadow: 0 32px 60px -32px rgba(0, 0, 0, 0.1);
+
+// From desktop
+@mixin laptop {
+  @media (max-width: $breakpoint-desktop - 0.2px) {
+    @content;
+  }
+}
+
+// From laptop
+@mixin ipad {
+  @media (max-width: $breakpoint-laptop - 0.2px) {
+    @content;
+  }
+}
+
+// From ipad
+@mixin tablet {
+  @media (max-width: $breakpoint-ipad - 0.2px) {
+    @content;
+  }
+}
+
+// From ipad
+@mixin landscape {
+  @media (max-width: $breakpoint-tablet - 0.2px) {
+    @content;
+  }
+}
+
+// From landscape
+@mixin phone {
+  @media (max-width: $breakpoint-phone - 0.2px) {
+    @content;
+  }
+}
+
+@mixin miniPhone {
+  @media (max-width: 360px) {
+    @content;
+  }
+}
+
+@mixin container {
+  box-sizing: content-box;
+  max-width: 1440px;
+  width: 100%;
+  margin: 0 auto;
+  padding-right: 30px;
+  padding-left: 30px;
+  @media (max-width: 1460px) {
+    box-sizing: border-box;
+
+
+  }
+  @include landscape {
+    padding-right: 20px;
+    padding-left: 20px;
+  }
+}
+
+@mixin container-small {
+  max-width: 1170px;
+  box-sizing: content-box;
+  margin: 0 auto;
+  width: 100%;
+  padding-right: 30px;
+  padding-left: 30px;
+  @media (max-width: 1400px) {
+    box-sizing: border-box;
+
+  }
+
+  @include landscape {
+    padding-right: 20px;
+    padding-left: 20px;
+  }
+  @include phone {
+    padding-right: 11px;
+    padding-left: 11px;
+  }
+}
+
+
+@mixin btn-color(
+  $color,
+  $background,
+  $color-active,
+  $text-color-disabled: $color-white
+) {
+  color: $color;
+  border-color: $background;
+  background-color: $background;
+
+  &_active,
+  &:focus,
+  &:hover {
+    &:not(:disabled) {
+      background-color: $color-active;
+      border-color: $color-active;
+    }
+  }
+
+  &:disabled {
+    border-color: $color-disabled;
+    background: $color-disabled;
+    color: $text-color-disabled;
+  }
+}
+
+@mixin btn-color-outline($color, $color-active: darken($color, 10)) {
+  color: $color;
+  border-color: $color;
+  background-color: transparent;
+
+  &_active,
+  &:focus,
+  &:hover {
+    &:not(:disabled) {
+      box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 4px 4px;
+      color: $color-active;
+      border-color: $color-active;
+      background: rgba(#000, 0.05);
+    }
+  }
+
+  &:disabled {
+    border-color: $color-disabled;
+    color: $color-disabled;
+  }
+}
+
+
+@mixin dropdown-content($radius: 12px) {
+  z-index: 5;
+  position: absolute;
+  top: calc(100% + 8px);
+  left: 0;
+  padding: $radius 0;
+  background: $color-white;
+  overflow: auto;
+  border-radius: $radius;
+  box-shadow: rgba(0, 0, 0, 0.2) 0px 6px 20px;
+}
+@import "mixins";

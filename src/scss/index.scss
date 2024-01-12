@@ -1,0 +1,129 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Open+Sans:wght@700&display=swap');
+@import '~react-toastify/dist/ReactToastify.css';
+@import './root';
+@import './normalize';
+@import './variables';
+@import './spacing';
+
+* {
+  box-sizing: border-box;
+  line-height: 1.4em;
+  -webkit-tap-highlight-color: transparent;
+}
+
+html,
+body {
+  height: 100%;
+  font-family: var(--font-family);
+  margin: 0;
+
+}
+
+.w-full {
+  width: 100%;
+}
+
+.app {
+  background-color: var(--color-background) !important;
+}
+
+.container {
+  @include container;
+}
+
+.flex {
+  display: flex;
+}
+
+.whitespace-nowrap {
+  white-space: nowrap;
+}
+
+.flex-col {
+  flex-direction: column;
+}
+
+.items-center {
+  align-items: center;
+}
+
+.hidden {
+  display: none !important;
+}
+
+.justify-center {
+  justify-content: center;
+}
+
+.justify-between {
+  justify-content: space-between;
+}
+
+.justify-end {
+  justify-content: flex-end;
+}
+
+.justify-start {
+  justify-content: flex-start;
+}
+
+.container-small {
+  @include container-small;
+}
+
+.relative {
+  position: relative;
+}
+
+ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+input,
+select,
+textarea {
+  border-radius: 0;
+  outline: none;
+  font-family: inherit;
+
+  // fix for FF
+  &:invalid,
+  &:required {
+    box-shadow: none;
+  }
+
+  &:disabled {
+    cursor: not-allowed;
+  }
+}
+
+fieldset {
+  padding: 0;
+  margin: 0;
+  border: none;
+}
+
+#root {
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+a,
+button {
+  cursor: pointer;
+  transition: 0.25s linear;
+  text-decoration: none;
+  font-family: inherit;
+  font-size: inherit;
+  color: inherit;
+  outline: none;
+  background: transparent;
+  border: none;
+
+  &:disabled {
+    cursor: not-allowed;
+  }
+}
