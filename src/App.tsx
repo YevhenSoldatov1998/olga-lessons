@@ -1,6 +1,6 @@
 import React from 'react';
 import {BrowserRouter, Route, Routes} from "react-router-dom";
-import Posts from "./pages/Posts";
+import Posts from "./pages/UserPage";
 
 const App = () => {
     return (
