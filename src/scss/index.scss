@@ -127,3 +127,33 @@ button {
     cursor: not-allowed;
   }
 }
+
+.characters-list {
+  margin: 40px;
+  display: grid;
+  gap: 40px;
+  grid-template-columns: repeat(4, 1fr);
+
+  &__item {
+    padding: 20px;
+    border: 1px solid var(--color-grayscale-c6);
+    border-radius: 10px;
+    box-shadow: 0 0 10px var(--color-grayscale-c4);
+    cursor: pointer;
+  }
+}
+
+.characters-navigation {
+  display: flex;
+  gap: 40px;
+  button {
+    padding: 8px 20px;
+    white-space: nowrap;
+    display: flex;
+    box-shadow: 0 0 10px var(--color-grayscale-c4);
+    &:disabled {
+      cursor: not-allowed;
+      opacity: .3;
+    }
+  }
+}

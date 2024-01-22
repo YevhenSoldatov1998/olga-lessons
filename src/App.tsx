@@ -1,16 +1,24 @@
 import React from 'react';
-import {BrowserRouter, Route, Routes} from "react-router-dom";
-import Posts from "./pages/UserPage";
+import {BrowserRouter, Link, Route, Routes} from "react-router-dom";
+import CharactersRest from "pages/CharactersRest";
+import CharactersGraphql from "pages/CharactersGraphql";
+import Home from 'pages/Home';
+import CharacterDetails from "./pages/CharacterDetails";
 
 const App = () => {
-    return (
-        <BrowserRouter>
-            <Routes>
-                <Route path='/posts' element={<Posts/>}/>
-                <Route path='/user' element={<div>User</div>}/>
-            </Routes>
-        </BrowserRouter>
-    );
+  return (
+    <BrowserRouter>
+      <Routes>
+        <Route path='/' element={<Home/>}/>
+
+        <Route path='/characters'>
+          <Route path='rest' element={<CharactersRest/>}/>
+          <Route path='graphql' element={<CharactersGraphql/>}/>
+        </Route>
+        <Route path='/character/:characterId' element={<CharacterDetails/>}/>
+      </Routes>
+    </BrowserRouter>
+  );
 };
 
 export default App;
