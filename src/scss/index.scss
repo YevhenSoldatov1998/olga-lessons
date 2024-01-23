@@ -157,14 +157,22 @@ button {
 .characters-navigation {
   display: flex;
   gap: 40px;
+
   button {
     padding: 8px 20px;
     white-space: nowrap;
     display: flex;
     box-shadow: 0 0 10px var(--color-grayscale-c4);
+
     &:disabled {
       cursor: not-allowed;
       opacity: 0.3;
     }
   }
+}
+
+.btn-more {
+  padding: 4px 10px;
+  box-shadow: 0 0 10px var(--color-grayscale-c4);
+  border-radius: 8px;
 }

@@ -1,7 +1,8 @@
-import React, { FC } from "react";
-import { Typography } from "components/modules";
-import { TypographyVariant } from "helpers/types";
-import { Character, NavigateFnParams, PageInfo } from "types";
+import React, {FC} from "react";
+import {Typography} from "components/modules";
+import {TypographyVariant} from "helpers/types";
+import {Character, NavigateFnParams, PageInfo} from "types";
+import {Link, useNavigate} from "react-router-dom";
 
 type CharactersListProps = {
   list?: Character[];
@@ -10,10 +11,12 @@ type CharactersListProps = {
 };
 
 const CharactersList: FC<CharactersListProps> = ({
-  list,
-  info,
-  onNavigate,
-}) => {
+                                                   list,
+                                                   info,
+                                                   onNavigate,
+                                                 }) => {
+  const navigate = useNavigate()
+
   if (!list)
     return (
       <Typography variant={TypographyVariant.h24}>Список пустий</Typography>
@@ -23,10 +26,14 @@ const CharactersList: FC<CharactersListProps> = ({
       {list.map((item) => (
         <div key={item.id} className="characters-list__item">
           <Typography variant={TypographyVariant.h24}>{item?.name}</Typography>
-          <img src={item.image} alt="hero" />
+          <Link to={'/character/' + item.id}>
+            <img src={item.image} alt="hero"/>
+          </Link>
           <Typography variant={TypographyVariant.p14}>
             {item?.species}
           </Typography>
+
+          <button className='btn-more mt-4' onClick={() => navigate(`/character/${item.id}`)}>Більше</button>
         </div>
       ))}
 

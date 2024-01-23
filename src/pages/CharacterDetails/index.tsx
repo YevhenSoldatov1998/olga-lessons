@@ -15,7 +15,10 @@ const CharacterDetails = () => {
   useEffect(() => {
     getCharacter();
   }, []);
-  return <div></div>;
+  return <div>
+
+    <h1>{character?.name}</h1>
+  </div>;
 };
 
 export default CharacterDetails;

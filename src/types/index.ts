@@ -61,5 +61,36 @@ export type CharacterResponse = {
   results: Character[];
   info: PageInfo;
 };
+export type CharactersResponse = {
+  characters: CharacterResponse
+}
+
 
 export type NavigateFnParams = "next" | "prev";
+
+
+type FilterCharacter = {
+  name?: string
+  status?: string
+  species?: string
+  type?: string
+  gender?: string
+}
+
+export type CharactersVariables = {
+  page?: number
+  filter?: FilterCharacter
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
