@@ -1,9 +1,9 @@
-@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Open+Sans:wght@700&display=swap');
-@import '~react-toastify/dist/ReactToastify.css';
-@import './root';
-@import './normalize';
-@import './variables';
-@import './spacing';
+@import url("https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Open+Sans:wght@700&display=swap");
+@import "~react-toastify/dist/ReactToastify.css";
+@import "./root";
+@import "./normalize";
+@import "./variables";
+@import "./spacing";
 
 * {
   box-sizing: border-box;
@@ -16,7 +16,6 @@ body {
   height: 100%;
   font-family: var(--font-family);
   margin: 0;
-
 }
 
 .w-full {
@@ -143,6 +142,18 @@ button {
   }
 }
 
+@media only screen and (max-width: 1641px) {
+  .characters-list {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media only screen and (max-width: 1260px) {
+  .characters-list {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
 .characters-navigation {
   display: flex;
   gap: 40px;
@@ -153,7 +164,7 @@ button {
     box-shadow: 0 0 10px var(--color-grayscale-c4);
     &:disabled {
       cursor: not-allowed;
-      opacity: .3;
+      opacity: 0.3;
     }
   }
 }

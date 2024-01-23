@@ -23,34 +23,43 @@
 //   "created": "2017-11-04T18:48:46.250Z"
 // },
 
-
 type Origin = {
-  name: string
-  url: string
-}
+  name: string;
+  url: string;
+};
+
+type Location = {
+  name: string;
+  url: string;
+};
+
+type Episode = string[];
 
 export type Character = {
-  id: number
-  name: string,
-  species: string,
-  status: string
-  type: string
-  gender: string
-  origin: Origin,
-  image: string
-}
+  id: number;
+  name: string;
+  status: string;
+  species: string;
+  type: string;
+  gender: string;
+  origin: Origin;
+  location: Location;
+  episode: Episode;
+  image: string;
+  url: string;
+  created: string;
+};
 
 export type PageInfo = {
-  count: number
-  pages: number
-  next: string | null
-  prev: string | null
-}
+  count: number;
+  pages: number;
+  next: string | null;
+  prev: string | null;
+};
 
 export type CharacterResponse = {
-  results: Character[],
-  info: PageInfo
-}
+  results: Character[];
+  info: PageInfo;
+};
 
-export type NavigateFnParams = 'next' | 'prev'
-
+export type NavigateFnParams = "next" | "prev";

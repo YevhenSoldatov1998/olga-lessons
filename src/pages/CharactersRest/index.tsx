@@ -1,25 +1,22 @@
-import React, {useEffect, useState} from 'react';
-import {API_REST} from "variables/urls";
+import React, { useEffect, useState } from "react";
+import { API_REST } from "variables/urls";
 import CharactersList from "components/UI/CharactersList";
-import {CharacterResponse} from "../../types";
+import { CharacterResponse } from "../../types";
 
-const initial_url = `${API_REST.character}?page=1`
-
+const initial_url = `${API_REST.character}?page=1`;
 
 const CharactersRest = () => {
-
-  const [data, setData] = useState<CharacterResponse | null>(null)
+  const [data, setData] = useState<CharacterResponse | null>(null);
 
   const getCharacters = async (url = initial_url) => {
-    const response = await fetch(url)
-    const result = await response.json()
-    setData(result)
-  }
+    const response = await fetch(url);
+    const result = await response.json();
+    setData(result);
+  };
 
   useEffect(() => {
-    getCharacters()
-  }, [])
-
+    getCharacters();
+  }, []);
 
   return (
     <div>
@@ -28,8 +25,8 @@ const CharactersRest = () => {
         info={data?.info}
         onNavigate={(value) => {
           if (!data) return;
-          const newUrl = data.info[value] as string
-          getCharacters(newUrl)
+          const newUrl = data.info[value] as string;
+          getCharacters(newUrl);
         }}
       />
     </div>
