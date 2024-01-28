@@ -142,13 +142,7 @@ button {
   }
 }
 
-@media only screen and (max-width: 1641px) {
-  .characters-list {
-    grid-template-columns: repeat(3, 1fr);
-  }
-}
-
-@media only screen and (max-width: 1260px) {
+@media only screen and (max-width: 1645px) {
   .characters-list {
     grid-template-columns: repeat(2, 1fr);
   }
@@ -175,4 +169,25 @@ button {
   padding: 4px 10px;
   box-shadow: 0 0 10px var(--color-grayscale-c4);
   border-radius: 8px;
+}
+
+.personal {
+  margin: 20px auto;
+}
+
+.personalName {
+  text-align: center;
+  padding: 20px;
+}
+
+.personalInfo {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  text-align: center;
+  font-size: 20px;
+}
+
+.personalPhoto {
+  height: 500px;
 }
