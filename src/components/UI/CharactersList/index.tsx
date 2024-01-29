@@ -37,15 +37,15 @@ const CharactersList: FC<CharactersListProps> = ({
         </div>
       ))}
 
-      <div className="characters-navigation">
-        <button disabled={!info?.prev} onClick={() => onNavigate("prev")}>
-          Попередня сторінка
-        </button>
+      {onNavigate && <div className="characters-navigation">
+          <button disabled={!info?.prev} onClick={() => onNavigate("prev")}>
+              Попередня сторінка
+          </button>
 
-        <button disabled={!info?.next} onClick={() => onNavigate("next")}>
-          Наступна сторінка
-        </button>
-      </div>
+          <button disabled={!info?.next} onClick={() => onNavigate("next")}>
+              Наступна сторінка
+          </button>
+      </div>}
     </div>
   );
 };

@@ -33,8 +33,10 @@ type Location = {
   url: string;
 };
 
-type Episode = string[];
+type Episode = { name: string };
 
+export type CharacterDetailResponse = { character: Character }
+export type CharacterDetailVariables = { id: number | string }
 export type Character = {
   id: number;
   name: string;
@@ -44,7 +46,7 @@ export type Character = {
   gender: string;
   origin: Origin;
   location: Location;
-  episode: Episode;
+  episode: Episode[];
   image: string;
   url: string;
   created: string;
@@ -76,6 +78,12 @@ type FilterCharacter = {
   type?: string
   gender?: string
 }
+
+export type CharacterVariables = {
+  id: number
+
+}
+
 
 export type CharactersVariables = {
   page?: number

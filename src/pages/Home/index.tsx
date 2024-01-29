@@ -1,12 +1,17 @@
 import React from 'react';
 import {Typography} from "../../components/modules";
 import {Link} from "react-router-dom";
+import {useQuery} from "@apollo/client";
+import {charactersQuery} from "../../apollo/queries/characters";
+import {characterQuery} from "../../apollo/queries/character";
 
 const Home = () => {
+const {data} = useQuery(characterQuery, {variables: { id: 1}})
+
+  debugger
   return (
     <div>
-      <Typography><Link to='/characters/graphql'>Graphql implementation</Link></Typography>
-      <Typography><Link to='/characters/rest'>Rest implementation</Link></Typography>
+      HOME
     </div>
   );
 };
