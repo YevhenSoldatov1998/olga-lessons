@@ -1,0 +1,16 @@
+.Component {
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+}
+
+.Container {
+  border: 1px solid var(--color-grayscale-c6);
+  border-radius: 8px;
+  box-shadow: 0 0 7px 0 rgb(0, 0, 0, .3);
+  padding: 40px 50px;
+
+}

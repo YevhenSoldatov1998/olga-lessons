@@ -1,0 +1,35 @@
+.Form {
+  display: flex;
+  flex-direction: column;
+  width: 360px;
+
+  > * {
+    margin-bottom: 16px;
+  }
+
+  input {
+    border: none;
+    outline: none;
+    background: var(--color-grayscale-c6);
+    padding: 4px 10px;
+    height: 42px;
+    border-radius: 8px;
+
+  }
+
+  .Submit {
+    background: var(--color-primary);
+    color: var(--color-white);
+    height: 44px;
+    border-radius: 8px;
+    margin-top: auto;
+    &:disabled {
+      opacity: .6;
+    }
+  }
+}
+
+
+.Form .Error{
+  border: 1px solid var(--color-red);
+}
