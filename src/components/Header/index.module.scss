@@ -1,0 +1,22 @@
+.Header {
+  width: 100%;
+  height: 70px;
+  border: 1px solid var(--color-grayscale-c6);
+  border-radius: 8px;
+  box-shadow: 0 0 7px 0 rgb(0, 0, 0, .3);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 70px;
+}
+
+.Logo {
+  font-weight: bold;
+  font-size: 18px;
+  color: var(--color-primary);
+}
+
+.Btn {
+  font-weight: 700;
+
+}
