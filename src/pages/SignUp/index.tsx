@@ -1,142 +1,99 @@
-import React, {ChangeEvent, FormEvent, useRef, useState} from 'react';
-import s from './index.module.scss'
+import React from "react";
+import s from "./index.module.scss";
+import classNames from "classnames/bind";
+import { useForm, SubmitHandler } from "react-hook-form";
+import { Link, useNavigate } from "react-router-dom";
+const cx = classNames.bind(s);
 
-import classNames from 'classnames/bind'
-import {Typography} from "components/modules";
-import {ColorEnum, FontWeight, TypographyVariant} from "helpers/types";
-import {Link, useNavigate} from "react-router-dom";
-import {SignupForm} from "../../types";
-import TextField from "../../components/UI/TextField";
-import {de} from "@faker-js/faker";
+type Inputs = {
+  email: string;
+  name: string;
+  password: string;
+  repeatPassword: string;
+};
 
-const cx = classNames.bind(s)
-const emailRegex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/
-const initialForm: SignupForm = {
-  username: '',
-  password: '',
-  email: '',
-  repeatPassword: ''
-}
+const SignUpForm = () => {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    watch,
+  } = useForm<Inputs>();
 
-const SignUp = () => {
-  const navigate = useNavigate()
-  const [form, setForm] = useState<SignupForm>(initialForm)
-  const [errors, setErrors] = useState<Partial<SignupForm> | null>(null)
+  const onSubmit: SubmitHandler<Inputs> = (data) => {
+    // console.log(data);
+  };
 
-  const onSubmit = (event: FormEvent<HTMLFormElement>) => {
-    let isError = false
-    event.preventDefault()
-
-    if (form.username === '') {
-      setErrors(prevState => ({...prevState, username: 'Це поле обовʼязкове'}))
-      isError = true
-    }
-    if (!form.email.match(emailRegex)) {
-      setErrors(prevState => ({...prevState, email: 'Введіть валідний email'}))
-      isError = true
-    }
-    if (form.password === '') {
-      setErrors(prevState => ({...prevState, password: 'Введіть пароль'}))
-      isError = true
-    }
-    if (form.password && !form.repeatPassword) {
-      setErrors(prevState => ({...prevState, repeatPassword: 'Введіть повторний пароль'}))
-      isError = true
-    }
-    if (form.password && form.repeatPassword && form.password !== form.repeatPassword) {
-      setErrors(prevState => ({...prevState, repeatPassword: 'Паролі не співпадають'}))
-      isError = true
-    }
-    if (isError) {
-      return;
-    }
-
-    const newUser = {
-      username: form.username,
-      email: form.email,
-      id: Date.now().toString()
-    }
-
-    const users = JSON.parse(localStorage.getItem('users') || "[]") || [];
-    users.push(newUser)
-
-    localStorage.setItem('users', JSON.stringify(users))
-    localStorage.setItem('isAuth', JSON.stringify(true))
-    navigate('/')
-
-  }
-  const resetForm = () => {
-    setErrors(null)
-  }
-
-  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-    const value = e.target.value
-    const name = e.target.name
-    setForm({
-      ...form,
-      [name]: value
-    })
-    resetForm()
-  }
+  const password = watch("password");
 
   return (
-    <form onSubmit={onSubmit} className={cx("Form")}>
-      <Typography
-        variant={TypographyVariant.h34}
-        weight={FontWeight.Bold}
-        color={ColorEnum.grayscale_c1}
-        className='text-center mb-3'
-      >Створити аккаунт</Typography>
+    <form className={cx("Form")} onSubmit={handleSubmit(onSubmit)}>
+      <input
+        placeholder="Enter your name"
+        {...register("name", {
+          required: "Name is required",
+        })}
+      />
+      {errors.name && (
+        <p style={{ color: "red", fontSize: "small" }}>{errors.name.message}</p>
+      )}
 
-      <TextField
-        name="username"
-        value={form.username}
-        placeholder='Введіть імʼя'
-        onChange={handleChange}
-        error={errors?.username}
+      <input
+        placeholder="Enter your email"
+        {...register("email", {
+          required: "Email is required",
+
+          pattern: {
+            value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+            message: "Invalid email address",
+          },
+        })}
       />
-      <TextField
-        name="email"
-        value={form.email}
-        placeholder='Введіть email'
-        onChange={handleChange}
-        error={errors?.email}
-      />
-      <TextField
-        name="password"
-        value={form.password}
-        placeholder='Введіть пароль'
-        onChange={handleChange}
-        error={errors?.password}
+      {errors.email && (
+        <p style={{ color: "red", fontSize: "small" }}>
+          {errors.email.message}
+        </p>
+      )}
+
+      <input
+        placeholder="Enter your password"
+        {...register("password", {
+          required: "Password is required",
+          minLength: {
+            value: 6,
+            message: "Password must be at least 6 characters",
+          },
+        })}
         type="password"
       />
-      <TextField
-        name="repeatPassword"
-        value={form.repeatPassword}
-        placeholder='Повторіть пароль'
-        onChange={handleChange}
-        error={errors?.repeatPassword}
+      {errors.password && (
+        <p style={{ color: "red", fontSize: "small" }}>
+          {errors.password.message}
+        </p>
+      )}
+
+      <input
+        placeholder="Repeat your password"
+        {...register("repeatPassword", {
+          validate: (value) => value === password || "Passwords do not match",
+        })}
         type="password"
       />
+      {errors.repeatPassword && (
+        <p style={{ color: "red", fontSize: "small" }}>
+          {errors.repeatPassword.message}
+        </p>
+      )}
 
-
-      <button
-        // disabled={Boolean(errors)}
-
-        //Boolean(['username']) => true
-        className={cx("Submit")} type="submit">Створити
+      <button className={cx("Submit")} type="submit">
+        Sign Up
       </button>
-
-
-      <div className='flex ml-auto items-center'>
-        <Typography variant={TypographyVariant.p14} color={ColorEnum.grayscale_c4} className='mr-1'>Уже маєш
-          аккаунт?</Typography>
-        <Link to='/sign-in'>
-          <Typography variant={TypographyVariant.p14} weight={FontWeight.Bold} color={ColorEnum.blue}>Увійти
-          </Typography></Link>
-      </div>
+      <Link className={cx("Create")} to="/sign-in">
+        <p>Just have an account?</p>
+        <button>Sign in</button>
+      </Link>
     </form>
   );
 };
 
-export default SignUp;
+export default SignUpForm;

@@ -14,7 +14,6 @@
     padding: 4px 10px;
     height: 42px;
     border-radius: 8px;
-
   }
 
   .Submit {
@@ -23,5 +22,16 @@
     height: 44px;
     border-radius: 8px;
     margin-top: auto;
+  }
+
+  .Create {
+    display: flex;
+    font-size: small;
+    justify-content: space-between;
+    margin-bottom: 0;
+
+    button {
+      color: var(--color-primary);
+    }
   }
 }

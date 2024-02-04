@@ -1,41 +1,54 @@
-import React, {FormEvent} from 'react';
-import s from './index.module.scss'
+import React from "react";
+import s from "./index.module.scss";
+import classNames from "classnames/bind";
+import { useForm, SubmitHandler } from "react-hook-form";
+import { Link } from "react-router-dom";
+const cx = classNames.bind(s);
 
-import classNames from 'classnames/bind'
-import {Typography} from "components/modules";
-import {ColorEnum, FontWeight, TypographyVariant} from "helpers/types";
-import {Link} from "react-router-dom";
+type Inputs = {
+  email: string;
+};
 
-const cx = classNames.bind(s)
-const SignIn = () => {
+const SignInForm = () => {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<Inputs>();
 
-  const onSubmit = (event: FormEvent<HTMLFormElement>) => {
-    event.preventDefault()
-  }
+  const onSubmit: SubmitHandler<Inputs> = (data) => {
+    // Handle sign-in logic here
+    console.log(data);
+  };
 
   return (
-    <form onSubmit={onSubmit} className={cx("Form")}>
-      <Typography
-        variant={TypographyVariant.h34}
-        weight={FontWeight.Bold}
-        color={ColorEnum.grayscale_c1}
-        className='text-center mb-3'
-      >Логін</Typography>
+    <form className={cx("Form")} onSubmit={handleSubmit(onSubmit)}>
+      <input
+        placeholder="Enter your email"
+        {...register("email", {
+          required: "Email is required",
 
-      <input type="text" placeholder="Enter your email" defaultValue=""/>
-      <input type="password" placeholder="Enter your password" defaultValue=""/>
-      <button className={cx("Submit")} type="submit">Увійти</button>
+          pattern: {
+            value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+            message: "Invalid email address",
+          },
+        })}
+      />
+      {errors.email && (
+        <p style={{ color: "red", fontSize: "small" }}>
+          {errors.email.message}
+        </p>
+      )}
 
-
-      <div className='flex ml-auto items-center'>
-        <Typography variant={TypographyVariant.p14} color={ColorEnum.grayscale_c4} className='mr-1'>Не маєш
-          аккаунта?</Typography>
-        <Link to='/sign-up'>
-          <Typography variant={TypographyVariant.p14} weight={FontWeight.Bold} color={ColorEnum.blue}>Створити
-            аккаун</Typography></Link>
-      </div>
+      <button className={cx("Submit")} type="submit">
+        Sign In
+      </button>
+      <Link className={cx("Create")} to="/sign-up">
+        <p>Still have no account?</p>
+        <button>Create account</button>
+      </Link>
     </form>
   );
 };
 
-export default SignIn;
+export default SignInForm;
