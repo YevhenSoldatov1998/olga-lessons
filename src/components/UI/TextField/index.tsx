@@ -7,18 +7,21 @@ import classNames from "classnames/bind";
 const cx = classNames.bind(s);
 
 type TextFieldProps = {
-  value: string,
+  value?: string,
   onChange: (e: ChangeEvent<HTMLInputElement>) => void
   error?: string
   placeholder?: string
   type?: 'text' | 'password',
-  name: string
+  name: string,
+  label?: string
 }
 
-const TextField: FC<TextFieldProps> = ({error, type = 'text', ...props}) => {
+const TextField: FC<TextFieldProps> = ({error, type = 'text', label, ...props}) => {
   return (
-    <>
+    <div className='flex flex-col'>
+      {label ? <label htmlFor={props.name}>{label}</label> : null}
       <input
+        id={props.name}
         className={cx('TextField', {
           Error: error
         })}
@@ -26,7 +29,7 @@ const TextField: FC<TextFieldProps> = ({error, type = 'text', ...props}) => {
         {...props}
       />
       {error && <Typography className='-mt-2' color={ColorEnum.red}>{error}</Typography>}
-    </>
+    </div>
   );
 };
 

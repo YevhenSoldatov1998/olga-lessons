@@ -1,8 +1,9 @@
 import React from "react";
 import s from "./index.module.scss";
 import classNames from "classnames/bind";
-import { useForm, SubmitHandler } from "react-hook-form";
-import { Link, useNavigate } from "react-router-dom";
+import {SubmitHandler, useForm} from "react-hook-form";
+import {Link, useNavigate} from "react-router-dom";
+
 const cx = classNames.bind(s);
 
 type Inputs = {
@@ -13,15 +14,28 @@ type Inputs = {
 };
 
 const SignUpForm = () => {
+  const navigate = useNavigate();
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    formState: {errors},
     watch,
   } = useForm<Inputs>();
 
   const onSubmit: SubmitHandler<Inputs> = (data) => {
     // console.log(data);
+    const newUser = {
+      username: data.name,
+      email: data.email,
+      id: Date.now().toString()
+    }
+
+    const users = JSON.parse(localStorage.getItem('users') || "[]") || [];
+    users.push(newUser)
+
+    localStorage.setItem('users', JSON.stringify(users))
+    localStorage.setItem('isAuth', JSON.stringify(true))
+    navigate('/')
   };
 
   const password = watch("password");
@@ -35,7 +49,7 @@ const SignUpForm = () => {
         })}
       />
       {errors.name && (
-        <p style={{ color: "red", fontSize: "small" }}>{errors.name.message}</p>
+        <p style={{color: "red", fontSize: "small"}}>{errors.name.message}</p>
       )}
 
       <input
@@ -50,7 +64,7 @@ const SignUpForm = () => {
         })}
       />
       {errors.email && (
-        <p style={{ color: "red", fontSize: "small" }}>
+        <p style={{color: "red", fontSize: "small"}}>
           {errors.email.message}
         </p>
       )}
@@ -67,7 +81,7 @@ const SignUpForm = () => {
         type="password"
       />
       {errors.password && (
-        <p style={{ color: "red", fontSize: "small" }}>
+        <p style={{color: "red", fontSize: "small"}}>
           {errors.password.message}
         </p>
       )}
@@ -80,7 +94,7 @@ const SignUpForm = () => {
         type="password"
       />
       {errors.repeatPassword && (
-        <p style={{ color: "red", fontSize: "small" }}>
+        <p style={{color: "red", fontSize: "small"}}>
           {errors.repeatPassword.message}
         </p>
       )}

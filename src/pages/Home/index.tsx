@@ -13,8 +13,6 @@ const Home = () => {
       <Typography variant={TypographyVariant.h18} color={ColorEnum.grayscale_c4} className='text-center'>
         email: {user?.email}
       </Typography>
-
-
     </div>
   );
 };

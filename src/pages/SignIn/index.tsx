@@ -1,8 +1,10 @@
 import React from "react";
 import s from "./index.module.scss";
 import classNames from "classnames/bind";
-import { useForm, SubmitHandler } from "react-hook-form";
-import { Link } from "react-router-dom";
+import {useForm, SubmitHandler} from "react-hook-form";
+import {Link} from "react-router-dom";
+import {useUserContext} from "../../shared/providers/UserProvider";
+
 const cx = classNames.bind(s);
 
 type Inputs = {
@@ -13,12 +15,12 @@ const SignInForm = () => {
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    formState: {errors},
   } = useForm<Inputs>();
-
+  const {setAuth} = useUserContext()
   const onSubmit: SubmitHandler<Inputs> = (data) => {
     // Handle sign-in logic here
-    console.log(data);
+    setAuth(true)
   };
 
   return (
@@ -27,7 +29,6 @@ const SignInForm = () => {
         placeholder="Enter your email"
         {...register("email", {
           required: "Email is required",
-
           pattern: {
             value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
             message: "Invalid email address",
@@ -35,7 +36,7 @@ const SignInForm = () => {
         })}
       />
       {errors.email && (
-        <p style={{ color: "red", fontSize: "small" }}>
+        <p style={{color: "red", fontSize: "small"}}>
           {errors.email.message}
         </p>
       )}
