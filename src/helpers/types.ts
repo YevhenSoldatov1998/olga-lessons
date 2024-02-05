@@ -78,3 +78,9 @@ export type OptionType = {
   label: string
   value: string
 }
+
+export type User = {
+  username: string,
+  email: string,
+  id: string
+}
