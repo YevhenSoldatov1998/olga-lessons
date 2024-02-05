@@ -16,7 +16,7 @@ const initialValue: CoworkingData = {
 const ManageCoworking = () => {
   const [currentStep, setCurrentStep] = useState<Steps>(Steps.GENERAL)
   const [data, setData] = useState<CoworkingData>(initialValue)
-
+  console.log('coworking data', data)
 
   return (
     <div>
@@ -27,7 +27,7 @@ const ManageCoworking = () => {
           onClick={() => setCurrentStep(s)}>{s}</button>)}
       </nav>
 
-      <ManageContext.Provider value={{currentStep, data, setData}}>
+      <ManageContext.Provider value={{currentStep, data, setData, setCurrentStep}}>
         {currentStep === Steps.GENERAL && <General/>}
         {currentStep === Steps.LANGUAGES && <Languages/>}
         {currentStep === Steps.FEATURES && <Features/>}

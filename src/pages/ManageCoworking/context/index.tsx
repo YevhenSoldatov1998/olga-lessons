@@ -4,6 +4,7 @@ import {CoworkingData, Steps} from "../../../types";
 
 type ManageContextType = {
   currentStep: Steps,
+  setCurrentStep: Dispatch<SetStateAction<Steps>>,
   data: CoworkingData,
   setData: Dispatch<SetStateAction<CoworkingData>>
 }

@@ -6,33 +6,30 @@ import classNames from "classnames/bind";
 
 const cx = classNames.bind(s);
 
-type TextFieldProps = {
+type TextAreaProps = {
   value?: string,
-  onChange: (e: ChangeEvent<HTMLInputElement>) => void
+  onChange: (e: ChangeEvent<HTMLTextAreaElement>) => void
   error?: string
   placeholder?: string
-  type?: 'text' | 'password',
   name: string,
   label?: string
 }
 
-const TextField: ForwardRefRenderFunction<HTMLInputElement, TextFieldProps> =
+const TextArea: ForwardRefRenderFunction<HTMLTextAreaElement, TextAreaProps> =
   ({
      error,
-     type = 'text',
      label,
      ...props
    }, ref) => {
     return (
       <div className='flex flex-col'>
         {label ? <label htmlFor={props.name}>{label}</label> : null}
-        <input
+        <textarea
           ref={ref}
           id={props.name}
-          className={cx('TextField', {
+          className={cx('TextArea', {
             Error: error
           })}
-          type={type}
           {...props}
         />
         {error && <Typography className='mt-1 mb-2' color={ColorEnum.red}>{error}</Typography>}
@@ -40,7 +37,7 @@ const TextField: ForwardRefRenderFunction<HTMLInputElement, TextFieldProps> =
     );
   };
 
-export default forwardRef(TextField);
+export default forwardRef(TextArea);
 
 //
 // const TextField: FC<TextFieldProps> = ({onChange, error, value, placeholder, type = 'text'}) => {

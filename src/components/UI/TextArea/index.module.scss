@@ -1,0 +1,15 @@
+
+.TextArea {
+  border: none;
+  outline: none;
+  background: var(--color-grayscale-c6);
+  padding: 4px 10px;
+  height: 42px;
+  min-height: 200px;
+  border-radius: 8px;
+
+  &.Error {
+    border: 1px solid var(--color-red);
+  }
+}
+

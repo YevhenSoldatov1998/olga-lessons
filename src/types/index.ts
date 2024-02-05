@@ -19,18 +19,19 @@ export enum Steps {
 export type GeneralForm = {
   name: string
   description: string
-  phones: string[]
+  phones: Array<{ value: string }>
   address?: string
 }
 
 export type LanguagesForm = {
-  languages: string[],
+  languages: string,
 }
 
 
 export type FeatureType = {
   name: string,
-  price: number
+  price: number,
+  tags: Array<{ value: string }>
 }
 
 export type FeaturesForm = {
