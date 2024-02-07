@@ -19,5 +19,14 @@ export  const generalSchema = z.object({
   phones: phonesSchema,
   address: z.string().optional()
 });
+
 // extracting the type
 export type GeneralSchema = z.infer<typeof generalSchema>;
+
+
+export const languageSchema = z.object({
+  language: z.string().min(1, {message: messageRequired})
+});
+
+
+export type LanguageSchema = z.infer<typeof languageSchema>;

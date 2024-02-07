@@ -1,17 +1,22 @@
 import React from "react";
-import { useForm, Controller } from "react-hook-form";
-// import { GeneralSchema, generalSchema } from "helpers/validations";
-// import { zodResolver } from "@hookform/resolvers/zod";
-// import TextArea from "components/UI/TextArea";
-// import TextField from "components/UI/TextField";
+import {Controller, useFieldArray, useForm} from "react-hook-form";
+import {FeaturesForm} from "types";
+
+
+const initialForm: FeaturesForm = {
+  features: [{name: 'Coffe', price: 1, tags: [{value: 'нескафе'}]}]
+}
 
 function Features() {
   const {
     handleSubmit,
     control,
     register,
-    formState: { errors },
-  } = useForm();
+    formState: {errors},
+  } = useForm<FeaturesForm>({
+    defaultValues: initialForm
+  });
+  const {fields, append} = useFieldArray({control: control, name: 'features'})
 
   const onSubmit = (data: any) => {
     console.log(data);
@@ -20,43 +25,18 @@ function Features() {
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
-      style={{ maxWidth: 500, padding: 40 }}
+      style={{maxWidth: 500, padding: 40}}
     >
       <h1>Features</h1>
-      <div>
-        <label>Enter name:</label>
-        <Controller
-          name="name"
-          control={control}
-          defaultValue=""
-          render={({ field }) => <input {...field} />}
-        />
-      </div>
-      <div>
-        <label>Enter price:</label>
-        <Controller
-          name="price"
-          control={control}
-          defaultValue=""
-          render={({ field }) => <input {...field} type="number" />}
-        />
-      </div>
-      <div>
-        <label>Enter tag:</label>
-        <Controller
-          name="tag"
-          control={control}
-          defaultValue=""
-          render={({ field }) => <input {...field} />}
-        />
-      </div>
 
-      {/* <TextArea
-        label="Enter name"
-        {...register("name")}
-        error={errors.name?.message}
-      /> */}
+      {fields?.map((feature, index) => (
+        <div>
+          <input type="text" {...register(`features.${index}.name`)}/>
+          <input type="number" {...register(`features.${index}.price`)}/>
 
+        </div>
+      ))}
+      <button onClick={() => append({name: '', price: 0, tags: []})}>Add new feature</button>
       <button
         style={{
           padding: 20,

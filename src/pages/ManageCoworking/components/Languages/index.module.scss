@@ -1,0 +1,7 @@
+.Submit {
+  background: var(--color-primary);
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+}

@@ -3,14 +3,14 @@ import General from "./components/General";
 import Languages from "./components/Languages";
 import Features from "./components/Features";
 import {ManageContext} from "./context";
-import {CoworkingData, FeaturesForm, GeneralForm, LanguagesForm, Steps} from "../../types";
+import {CoworkingData, Steps} from "../../types";
 
 
 const steps = [Steps.GENERAL, Steps.LANGUAGES, Steps.FEATURES]
 
 const initialValue: CoworkingData = {
   general: null,
-  languages: null,
+  language: '',
   features: null
 }
 const ManageCoworking = () => {

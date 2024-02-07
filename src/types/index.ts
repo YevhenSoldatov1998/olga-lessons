@@ -23,15 +23,14 @@ export type GeneralForm = {
   address?: string
 }
 
-export type LanguagesForm = {
-  languages: string,
+
+export type TagType = {
+  value: string
 }
-
-
 export type FeatureType = {
   name: string,
   price: number,
-  tags: Array<{ value: string }>
+  tags: Array<TagType>
 }
 
 export type FeaturesForm = {
@@ -40,6 +39,6 @@ export type FeaturesForm = {
 
 export type CoworkingData = {
   general: GeneralForm | null,
-  languages: LanguagesForm | null,
+  language: string,
   features: FeaturesForm | null
 }
