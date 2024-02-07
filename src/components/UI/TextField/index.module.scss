@@ -7,8 +7,16 @@
   height: 42px;
   border-radius: 8px;
 
+  &Tag {
+    border: 2px solid var(--color-grayscale-c6);
+    background: transparent;
+    position: relative;
+
+  }
+
   &.Error {
     border: 1px solid var(--color-red);
   }
 }
+
 

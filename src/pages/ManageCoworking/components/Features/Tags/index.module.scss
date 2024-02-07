@@ -1,0 +1,13 @@
+.Tags {
+  display: grid;
+  grid-template-columns: repeat(4, 100px);
+  gap: 20px;
+
+  input {
+    width: 100%;
+  }
+}
+
+.BtnRemove {
+  font-size: 22px;
+}

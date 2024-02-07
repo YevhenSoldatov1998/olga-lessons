@@ -3,8 +3,8 @@ import React, {
   forwardRef,
   ForwardRefRenderFunction,
 } from "react";
-import { Typography } from "components/Typography";
-import { ColorEnum } from "helpers/types";
+import {Typography} from "components/Typography";
+import {ColorEnum} from "helpers/types";
 import s from "./index.module.scss";
 import classNames from "classnames/bind";
 
@@ -15,24 +15,29 @@ type TextFieldProps = {
   onChange: (e: ChangeEvent<HTMLInputElement>) => void;
   error?: string;
   placeholder?: string;
-  type?: "text" | "password";
+  type?: "text" | "password" | "number";
   name: string;
   label?: string;
+  className?: string
+  classNameInput?: string,
+  view?: 'default' | 'tag'
 };
 
 const TextField: ForwardRefRenderFunction<HTMLInputElement, TextFieldProps> = (
-  { error, type = "text", label, ...props },
+  {error, type = "text", label, className, classNameInput, view = 'default', ...props},
   ref
 ) => {
   return (
-    <div className="flex flex-col">
+    <div className={`flex flex-col ${className || ''} ${cx('Component')}`}>
       {label ? <label htmlFor={props.name}>{label}</label> : null}
       <input
         ref={ref}
         id={props.name}
-        className={cx("TextField", {
+        className={cx("TextField", classNameInput || '', {
           Error: error,
+          TextFieldTag: view === 'tag'
         })}
+
         type={type}
         {...props}
       />

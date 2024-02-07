@@ -14,7 +14,7 @@ const initialValue: CoworkingData = {
   features: null
 }
 const ManageCoworking = () => {
-  const [currentStep, setCurrentStep] = useState<Steps>(Steps.GENERAL)
+  const [currentStep, setCurrentStep] = useState<Steps>(Steps.FEATURES)
   const [data, setData] = useState<CoworkingData>(initialValue)
   console.log('coworking data', data)
 
@@ -23,6 +23,7 @@ const ManageCoworking = () => {
 
       <nav>
         {steps.map(s => <button
+          key={s}
           style={{color: currentStep === s ? "green" : "black"}}
           onClick={() => setCurrentStep(s)}>{s}</button>)}
       </nav>
