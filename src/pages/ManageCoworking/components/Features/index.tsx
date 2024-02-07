@@ -1,20 +1,20 @@
 import React from "react";
-import { Controller, useForm } from "react-hook-form";
-import TextField from "components/UI/TextField";
-import { GeneralSchema, generalSchema } from "helpers/validations";
-import { useManageContext } from "../../context";
+import { useForm, Controller } from "react-hook-form";
+// import { GeneralSchema, generalSchema } from "helpers/validations";
+// import { zodResolver } from "@hookform/resolvers/zod";
+// import TextArea from "components/UI/TextArea";
+// import TextField from "components/UI/TextField";
 
-const Features = () => {
-  const { setData, setCurrentStep } = useManageContext();
+function Features() {
   const {
-    register,
     handleSubmit,
     control,
+    register,
     formState: { errors },
-  } = useForm<GeneralSchema>({});
+  } = useForm();
 
-  const onSubmit = (data: GeneralSchema) => {
-    setData((prevState) => ({ ...prevState, general: data }));
+  const onSubmit = (data: any) => {
+    console.log(data);
   };
 
   return (
@@ -23,46 +23,39 @@ const Features = () => {
       style={{ maxWidth: 500, padding: 40 }}
     >
       <h1>Features</h1>
+      <div>
+        <label>Enter name:</label>
+        <Controller
+          name="name"
+          control={control}
+          defaultValue=""
+          render={({ field }) => <input {...field} />}
+        />
+      </div>
+      <div>
+        <label>Enter price:</label>
+        <Controller
+          name="price"
+          control={control}
+          defaultValue=""
+          render={({ field }) => <input {...field} type="number" />}
+        />
+      </div>
+      <div>
+        <label>Enter tag:</label>
+        <Controller
+          name="tag"
+          control={control}
+          defaultValue=""
+          render={({ field }) => <input {...field} />}
+        />
+      </div>
 
-      <Controller
-        control={control}
-        render={({
-          field: { value, onChange, ...inputProps },
-          fieldState: { error },
-        }) => {
-          return (
-            <TextField
-              label={"Enter name"}
-              error={error?.message}
-              value={value}
-              onChange={({ target: { value } }) => {
-                let newValue =
-                  value.charAt(0).toUpperCase() +
-                  value.substring(1, value.length);
-                onChange(newValue);
-              }}
-              {...inputProps}
-            />
-          );
-        }}
-        name="name"
-      />
-
-      {/* <Controller
-        control={control}
-        render={({ field }) => (
-          <TextField label="Price" type="number" {...field} />
-        )}
-        name="price"
-      />
-
-      <Controller
-        control={control}
-        render={({ field }) => <TextField label="Tag" {...field} />}
-        name="tag"
+      {/* <TextArea
+        label="Enter name"
+        {...register("name")}
+        error={errors.name?.message}
       /> */}
-
-      <br />
 
       <button
         style={{
@@ -72,6 +65,7 @@ const Features = () => {
           borderRadius: 8,
           color: "white",
           backgroundColor: `var(--color-primary)`,
+
           marginBottom: 10,
         }}
         type="submit"
@@ -80,6 +74,6 @@ const Features = () => {
       </button>
     </form>
   );
-};
+}
 
 export default Features;
