@@ -1,0 +1,37 @@
+.Backdrop {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 100;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.Modal {
+  width: 480px;
+  min-height: 300px;
+  background-color: white;
+  border-radius: 5px;
+  padding: 40px;
+  position: relative;
+}
+
+.CloseBtn {
+  position: absolute;
+  right: 0;
+  top: 0;
+  transform: translate(50%, -50%);
+  background: white;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  font-size: 22px;
+  border: 1px solid var(--color-grayscale-c4)
+}

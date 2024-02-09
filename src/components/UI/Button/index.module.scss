@@ -1,0 +1,168 @@
+@import '~scss/variables';
+@import '~scss/mixins';
+
+@mixin generateBtn {
+  border: 1px solid transparent;
+  padding: 0 42px;
+  font-weight: 400;
+  font-size: 20px;
+  font-family: var(--font-family);
+  @include phone {
+    font-size: 18px;
+    padding: 0 22px;
+  }
+  &:disabled {
+    * {
+      cursor: not-allowed;
+    }
+
+    opacity: .4;
+    cursor: not-allowed;
+  }
+}
+
+.Btn {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+
+  color: var(--color-white);
+  @include generateBtn;
+
+  &_dark {
+    background-color: var(--color-grayscale-c2);
+
+    &:focus {
+      border: 1px solid var(--color-primary);
+    }
+  }
+
+  &_green {
+    background-color: var(--color-green);
+    &-light {
+      background-color: var(--color-grey-light);
+      color: var(--color-green);
+    }
+  }
+
+  &_gray {
+    background-color: var(--color-grayscale-c6) !important;
+    color: var(--color-grayscale-c3) !important;
+
+  }
+
+  &_primary {
+    background-color: var(--color-primary);
+
+    &:focus, &:hover {
+      background-color: var(--color-primary-hover);
+    }
+
+    &:active {
+      background-color: var(--color-primary-clicked);
+    }
+
+  }
+
+  &_white {
+    background-color: var(--color-white);
+    color: var(--color-text-dark);
+
+  }
+
+  &_red {
+    background-color: var(--color-red);
+    color: var(--color-white);
+    border: 1px solid var(--color-red);
+    &-light{
+      background-color: var(--color-red-20);
+      color: var(--color-red);
+    }
+  }
+
+  &_outline {
+    &_dark {
+      background-color: transparent;
+      border: 1px solid var(--color-border-light) !important;
+      color: var(--color-text-dark);
+
+      &:focus {
+        border: 1px solid var(--color-primary);
+      }
+    }
+
+    &_primary {
+      background-color: transparent;
+      border: 1px solid var(--color-primary) !important;
+      color: var(--color-primary);
+    }
+
+    &_white {
+
+    }
+
+    &_red {
+      background-color: transparent;
+      border: 1px solid var(--color-red);
+      color: var(--color-red);
+    }
+  }
+}
+
+.large {
+  height: 70px;
+  font-size: 20px;
+  padding: 22px 42px;
+  @include landscape {
+    font-size: 18px;
+    padding: 4px 40px;
+  }
+  @include phone {
+    padding: 4px 30px;
+
+  }
+}
+
+.medium {
+  font-size: 18px;
+  line-height: 40px;
+  height: 44px;
+  padding: 2px 40px;
+
+}
+
+.small {
+  padding: 0px 17px;
+  height: 47px;
+  font-size: 16px;
+  line-height: 40px;
+
+}
+
+
+.Ripple {
+  position: relative;
+  overflow: hidden;
+}
+
+.RippleEffect {
+  position: absolute;
+  background-color: rgba(255, 255, 255, 0.5);
+  //background-color: rgba(255, 255, 255, 0.5);
+  border-radius: 50%;
+  animation: ripple 1s;
+  height: 300px;
+  width: 300px;
+  animation-fill-mode: forwards;
+}
+
+@keyframes ripple {
+  0% {
+    transform: scale(0);
+    opacity: 0.5;
+  }
+  100% {
+    transform: scale(2);
+    opacity: 0;
+  }
+}

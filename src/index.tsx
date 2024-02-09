@@ -4,12 +4,17 @@ import 'scss/index.scss'
 import {ApolloProvider} from "@apollo/client";
 import client from "apollo";
 import UserProvider from "./shared/providers/UserProvider";
+import {store} from 'store'
+import {Provider} from 'react-redux'
+
 
 React.createRoot(document.getElementById('root')!).render(
   <ApolloProvider client={client}>
-    <UserProvider>
-      <App/>
-    </UserProvider>
+    <Provider store={store}>
+      <UserProvider>
+        <App/>
+      </UserProvider>
+    </Provider>
   </ApolloProvider>,
 )
 

@@ -6,7 +6,8 @@ type ManageContextType = {
   currentStep: Steps,
   setCurrentStep: Dispatch<SetStateAction<Steps>>,
   data: CoworkingData,
-  setData: Dispatch<SetStateAction<CoworkingData>>
+  setData: Dispatch<SetStateAction<CoworkingData>>,
+  handleSaveCoworking: () => void
 }
 export const ManageContext = createContext<ManageContextType | null>(null)
 
