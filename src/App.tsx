@@ -6,6 +6,7 @@ import SignUp from "pages/SignUp";
 import AuthLayout from "shared/layouts/AuthLayout";
 import RootLayout from "shared/layouts/RootLayout";
 import ManageCoworking from "./pages/ManageCoworking";
+import Test from "./pages/Test";
 
 const App = () => {
   return (
@@ -13,6 +14,7 @@ const App = () => {
       <Routes>
         <Route element={<RootLayout/>}>
           <Route path="/" element={<Home/>}/>
+          <Route path="/test" element={<Test/>}/>
           <Route element={<AuthLayout/>}>
             <Route path="/sign-in" element={<SignInForm/>}/>
             <Route path="/sign-up" element={<SignUp/>}/>

@@ -21,7 +21,7 @@ const initialValue: CoworkingData = {
   features: {features: [{name: 'Coffe', price: 1, tags: [{value: 'нескафе'}]}]}
 }
 const ManageCoworking = () => {
-  const [currentStep, setCurrentStep] = useState<Steps>(Steps.FEATURES)
+  const [currentStep, setCurrentStep] = useState<Steps>(Steps.GENERAL)
   const [data, setData] = useState<CoworkingData>(initialValue)
   const dispatch = useDispatch()
 

@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React from "react";
 import {FormProvider, useFieldArray, useForm} from "react-hook-form";
 import {FeaturesForm} from "types";
 import {Typography} from "../../../../components/modules";
@@ -11,6 +11,7 @@ import {useManageContext} from "../../context";
 import Modal from "../../../../components/Modal";
 import Button from "../../../../components/UI/Button";
 import {useNavigate} from "react-router-dom";
+import {useModal} from "../../../../helpers/hooks/useModal";
 
 const initialForm: FeaturesForm = {
   features: [{name: 'Coffe', price: 1, tags: [{value: 'нескафе'}]}],
@@ -20,34 +21,24 @@ const initialForm: FeaturesForm = {
 function Features() {
   const navigate = useNavigate()
 
-  const [isOpenModal, setIsOpenModal] = useState(false)
+  const {isOpen, close, open} = useModal()
   const {handleSaveCoworking, setData} = useManageContext()
   const methods = useForm<FeaturesForm>({
     defaultValues: initialForm
   });
   const {fields, append} = useFieldArray({control: methods.control, name: 'features'})
-
-  const showModalSuccess = () => {
-    setIsOpenModal(true)
-  }
-  const closeModalSuccess = () => {
-    setIsOpenModal(false)
-  }
   const handleModalConfirm = () => {
-    closeModalSuccess()
-    navigate('/')
+    close()
+    // navigate('/')
   }
-
   const onSubmit = (data: any) => {
     setData(prevState => ({...prevState, features: data.features}))
     handleSaveCoworking()
-    showModalSuccess()
   };
-
 
   return (
     <>
-      <Modal isOpen={isOpenModal} close={closeModalSuccess}>
+      <Modal isOpen={isOpen} close={close}>
         <div className='flex flex-col justify-between'>
           <Typography className='flex-1' variant={TypographyVariant.h34}
                       weight={FontWeight.Bold}>Ваш коворкінг
@@ -55,6 +46,7 @@ function Features() {
           <div className='flex justify-center mt-5'>
             <Button size={'medium'} onClick={handleModalConfirm}>На головну</Button>
           </div>
+
         </div>
       </Modal>
 
