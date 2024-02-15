@@ -1,38 +1,58 @@
-import React, {FC, ReactNode, useCallback} from 'react';
-import {SlowComponent} from './SlowComponent';
+import React, {useEffect} from 'react';
+import NestedComponent from "./NestedComponent";
+import {Typography} from "../../components/modules";
+import {TypographyVariant} from "../../helpers/types";
 
-const useAuth = () => {
-  const [isAuth, setAuth] = React.useState(false)
-  const switchAuth = useCallback(() => {
-    setAuth(prev => !prev)
-  }, [])
-  return {
-    isAuth,
-    switchAuth
+
+class Some extends React.Component {
+  componentDidMount() {
+    console.log('mounted')
+  }
+
+  componentDidUpdate(prevProps: Readonly<{}>, prevState: Readonly<{}>, snapshot?: any) {
+
+  }
+
+  componentWillUnmount() {
+    console.log('unmounted')
+  }
+
+
+  render() {
+    return <h2>Hi, I am a Car!</h2>;
   }
 }
 
 
-const withAuth = ({AuthComponent, UnAuthComponent}: { AuthComponent: FC, UnAuthComponent: FC }) => {
-  function WithAuthComponent() {
-    const {isAuth, switchAuth} = useAuth()
-    return isAuth ? <AuthComponent/> : <UnAuthComponent/>
-  }
-
-  WithAuthComponent.displayName = `WithAuthComponent(${AuthComponent.displayName || AuthComponent.name || 'Component'})`
-  return WithAuthComponent
-}
 const Test = () => {
   const [count, setCount] = React.useState(0)
+  const [show, setShow] = React.useState(true)
+
+  useEffect(() => {
+    if (count === 0) return;
+  }, [count]);
+
   return (
     <div>
-      {count}
+      <h1>Count 1</h1>
+      <h2>{count}</h2>
       <button onClick={() => setCount(v => v + 1)}>Click me</button>
-      Test
-      <SlowComponent/>
+      <br/>
+      <button onClick={() => setShow(!show)}>{show ? 'Hide' : 'Show'}</button>
+      {show && <NestedComponent/>}
+      {/*<Typography variant={TypographyVariant.h64}>{a}</Typography>*/}
+      {/*<button onClick={() => {*/}
+      {/*  a++*/}
+      {/*  console.log(a)*/}
+      {/*}}>Increment</button>*/}
+
+      {/*<NestedComponent/>*/}
+      {/*<SlowComponent/>*/}
+
     </div>
   );
 };
+
 
 export default Test;
 
