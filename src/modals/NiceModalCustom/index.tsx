@@ -18,3 +18,5 @@ const NiceModalCustom: FC<{ id: string }> = (props) => {
 };
 
 export default NiceModal.create(NiceModalCustom);
+
+
