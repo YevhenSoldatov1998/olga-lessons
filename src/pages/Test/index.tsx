@@ -1,54 +1,55 @@
-import React, {useEffect} from 'react';
-import NestedComponent from "./NestedComponent";
+import React from 'react';
+import Accordion from "../../components/UI/Accordion";
 import {Typography} from "../../components/modules";
-import {TypographyVariant} from "../../helpers/types";
-
-
-class Some extends React.Component {
-  componentDidMount() {
-    console.log('mounted')
-  }
-
-  componentDidUpdate(prevProps: Readonly<{}>, prevState: Readonly<{}>, snapshot?: any) {
-
-  }
-
-  componentWillUnmount() {
-    console.log('unmounted')
-  }
-
-
-  render() {
-    return <h2>Hi, I am a Car!</h2>;
-  }
-}
 
 
 const Test = () => {
-  const [count, setCount] = React.useState(0)
-  const [show, setShow] = React.useState(true)
 
-  useEffect(() => {
-    if (count === 0) return;
-  }, [count]);
 
   return (
     <div>
-      <h1>Count 1</h1>
-      <h2>{count}</h2>
-      <button onClick={() => setCount(v => v + 1)}>Click me</button>
-      <br/>
-      <button onClick={() => setShow(!show)}>{show ? 'Hide' : 'Show'}</button>
-      {show && <NestedComponent/>}
-      {/*<Typography variant={TypographyVariant.h64}>{a}</Typography>*/}
-      {/*<button onClick={() => {*/}
-      {/*  a++*/}
-      {/*  console.log(a)*/}
-      {/*}}>Increment</button>*/}
 
+      <Accordion initialVisibleId='panel-2'>
+        <Accordion.Item id={'panel-1'}>
+          <Accordion.Summary>
+            General settings
+          </Accordion.Summary>
+          <Accordion.Details>
+            <Typography>
+              Nulla facilisi. Phasellus sollicitudin nulla et quam mattis feugiat.
+              Aliquam eget maximus est, id dignissim quam.
+            </Typography>
+          </Accordion.Details>
+        </Accordion.Item>
+
+        <Accordion.Item id={'panel-2'}>
+          <Accordion.Summary>
+            Profile settings
+          </Accordion.Summary>
+          <Accordion.Details>
+            <Typography>
+              Donec placerat, lectus sed mattis semper, neque lectus feugiat lectus,
+              varius pulvinar diam eros in elit. Pellentesque convallis laoreet
+              laoreet.
+            </Typography>
+          </Accordion.Details>
+        </Accordion.Item>
+
+
+        <Accordion.Item id={'panel-3'}>
+          <Accordion.Summary>
+            Profile settings
+          </Accordion.Summary>
+          <Accordion.Details>
+            <Typography>
+              Donec placerat, lectus sed mattis semper, neque lectus feugiat lectus,
+              varius pulvinar diam eros in elit. Pellentesque convallis laoreet
+              laoreet.
+            </Typography>
+          </Accordion.Details>
+        </Accordion.Item>
+      </Accordion>
       {/*<NestedComponent/>*/}
-      {/*<SlowComponent/>*/}
-
     </div>
   );
 };

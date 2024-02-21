@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useCallback, useMemo, useState} from 'react';
 import General from "./components/General";
 import Languages from "./components/Languages";
 import Features from "./components/Features";
@@ -8,7 +8,7 @@ import {useDispatch} from "react-redux";
 import {addNewCoworking} from "../../store/reducers/coworkings";
 
 
-const steps = [Steps.GENERAL, Steps.LANGUAGES, Steps.FEATURES]
+export const steps = [Steps.GENERAL, Steps.LANGUAGES, Steps.FEATURES]
 
 const initialValue: CoworkingData = {
   general: {
@@ -28,6 +28,9 @@ const ManageCoworking = () => {
   const handleSaveCoworking = () => {
     dispatch(addNewCoworking(data))
   }
+  const value = useMemo(() => ({
+    currentStep, data, setData, setCurrentStep, handleSaveCoworking
+  }), [currentStep])
 
   return (
     <div>
@@ -39,7 +42,7 @@ const ManageCoworking = () => {
           onClick={() => setCurrentStep(s)}>{s}</button>)}
       </nav>
 
-      <ManageContext.Provider value={{currentStep, data, setData, setCurrentStep, handleSaveCoworking}}>
+      <ManageContext.Provider value={value}>
         {currentStep === Steps.GENERAL && <General/>}
         {currentStep === Steps.LANGUAGES && <Languages/>}
         {currentStep === Steps.FEATURES && <Features/>}
@@ -49,3 +52,4 @@ const ManageCoworking = () => {
 };
 
 export default ManageCoworking;
+

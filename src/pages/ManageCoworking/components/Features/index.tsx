@@ -38,17 +38,7 @@ function Features() {
 
   return (
     <>
-      <Modal isOpen={isOpen} close={close}>
-        <div className='flex flex-col justify-between'>
-          <Typography className='flex-1' variant={TypographyVariant.h34}
-                      weight={FontWeight.Bold}>Ваш коворкінг
-            створено</Typography>
-          <div className='flex justify-center mt-5'>
-            <Button size={'medium'} onClick={handleModalConfirm}>На головну</Button>
-          </div>
-
-        </div>
-      </Modal>
+      <button onClick={open}>Open modal</button>
 
 
       <FormProvider {...methods}>
@@ -116,8 +106,24 @@ function Features() {
           </button>
         </form>
       </FormProvider>
+
+      {isOpen && <ConditionModal isOpen={isOpen} close={close} handleModalConfirm={handleModalConfirm}/>}
     </>
   );
+}
+
+function ConditionModal({isOpen, close, handleModalConfirm}: any) {
+  return <Modal isOpen={isOpen} close={close}>
+    <div className='flex flex-col justify-between'>
+      <Typography className='flex-1' variant={TypographyVariant.h34}
+                  weight={FontWeight.Bold}>Ваш коворкінг
+        створено</Typography>
+      <div className='flex justify-center mt-5'>
+        <Button size={'medium'} onClick={handleModalConfirm}>На головну</Button>
+      </div>
+
+    </div>
+  </Modal>
 }
 
 export default Features;

@@ -1,12 +1,10 @@
-import {FC, memo} from "react";
-
 function slowFunc() {
-  for (let i = 0; i < 100; i++) {
+  for (let i = 0; i < 1000; i++) {
     console.log('Hello', Math.random())
   }
 }
 
-export const SlowComponent = memo(() => {
+export const SlowComponent = () => {
   slowFunc()
   return <>"I'm slow :("</>
-}) as FC
+}

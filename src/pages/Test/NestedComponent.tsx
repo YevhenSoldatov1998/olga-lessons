@@ -1,26 +1,15 @@
 import DeepNestedComponent from "./DeepNestedComponent";
-import {useEffect, useState} from "react";
+import {memo} from "react";
 
 const NestedComponent = () => {
-  const [now, setNow] = useState(new Date())
-
-  useEffect(() => {
-    const handleMove = (e: any) => {
-      console.log(e.clientX)
-    }
-    document.addEventListener('mousemove', handleMove)
-    return () => {
-      document.removeEventListener('mousemove', handleMove)
-    }
-  }, [now]);
+  console.log('RENDER NESTED')
 
 
   return (
     <>
-      time: {now.getHours()}:{now.getMinutes()}:{now.getSeconds()}
       <div>Nested Component</div>
-      {/*<DeepNestedComponent/>*/}
+      <DeepNestedComponent/>
     </>
   )
 }
-export default NestedComponent
+export default memo(NestedComponent)
