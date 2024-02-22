@@ -1,4 +1,4 @@
-import React, { FC, PropsWithChildren } from "react";
+import React, {FC, PropsWithChildren} from "react";
 import {
   AccordionContext,
   AccordionItemContext,
@@ -19,18 +19,22 @@ interface ItemProps {
   id: string;
 }
 
+interface SummeryProps {
+  className?: string;
+}
+
 interface AccordionComponent extends FC<PropsWithChildren<AccordionProps>> {
-  Summary: FC<PropsWithChildren>;
+  Summary: FC<PropsWithChildren<SummeryProps>>;
   Details: FC<PropsWithChildren>;
   Item: FC<PropsWithChildren<ItemProps>>;
 }
 
-const Accordion: AccordionComponent = ({ children, initialVisibleId }) => {
+const Accordion: AccordionComponent = ({children, initialVisibleId}) => {
   const [visible, setVisible] = React.useState(initialVisibleId || null);
   return (
     <div className={cx("Accordion")}>
       <AccordionContext.Provider
-        value={{ visibleId: visible, setVisibleId: setVisible }}
+        value={{visibleId: visible, setVisibleId: setVisible}}
       >
         {children}
       </AccordionContext.Provider>
@@ -38,7 +42,7 @@ const Accordion: AccordionComponent = ({ children, initialVisibleId }) => {
   );
 };
 
-const Item: FC<PropsWithChildren<ItemProps>> = ({ children, id }) => {
+const Item: FC<PropsWithChildren<ItemProps>> = ({children, id}) => {
   const value = useAccordionContext();
   return (
     <AccordionItemContext.Provider value={id}>
@@ -48,16 +52,16 @@ const Item: FC<PropsWithChildren<ItemProps>> = ({ children, id }) => {
     </AccordionItemContext.Provider>
   );
 };
-const Summary: FC<PropsWithChildren> = ({ children }) => {
+const Summary: FC<PropsWithChildren<SummeryProps>> = ({children, className}) => {
   const value = useAccordionContext();
   const id = useAccordionItemContext();
   return (
-    <div className={cx("Summary")} onClick={() => value?.setVisibleId(id)}>
+    <div className={cx("Summary", className || '')} onClick={() => value?.setVisibleId(id)}>
       {children}
     </div>
   );
 };
-const Details: FC<PropsWithChildren> = ({ children }) => {
+const Details: FC<PropsWithChildren> = ({children}) => {
   const itemId = useAccordionItemContext();
   const value = useAccordionContext();
   if (itemId !== value?.visibleId) return null;

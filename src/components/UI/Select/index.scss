@@ -1,0 +1,26 @@
+body .select {
+
+  &__control {
+    border: none ;
+    //outline: none;
+    background: var(--color-grayscale-c6) ;
+    //padding: 4px 10px;
+    height: 42px ;
+    border-radius: 8px ;
+  }
+
+
+  // isMulti
+  &__multi-value {
+    background: var(--color-white);
+    border-radius: 4px;
+    font-size: 18px;
+    margin-right: 10px;
+  }
+
+  &__option--is-focused {
+    background: var(--color-primary-40);
+  }
+
+
+}
