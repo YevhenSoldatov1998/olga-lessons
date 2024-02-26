@@ -7,6 +7,7 @@ import Button from "../../components/UI/Button";
 import Divider from "../../components/UI/Divider";
 import ModalEditUser from "../../modals/EditUser";
 import ModalCreateUser from "../../modals/CreateUser";
+import NiceModalInfo from "../../modals/NiceModalInfo";
 
 
 export type HobbyOption = {
@@ -41,8 +42,27 @@ const Home = () => {
   const createUser = (user: UserType) => {
     setUsers(prevState => [...prevState, {...user, id: Date.now().toString()}])
   }
+  const updateUser = (user: UserType) => {
+    debugger
+    const newUsers = users.map((u) => u.id === user.id ? user : u)
+    debugger
+    setUsers(newUsers)
+  }
+
+  const showModalInfoSuccess = (username: any) => {
+    NiceModal.show(NiceModalInfo, {text: `User ${username} was updated`})
+  }
+
+  const showModalInfoError = () => {
+    NiceModal.show(NiceModalInfo, {text: 'Opps.. something wrong'})
+  }
+
   const showModalEdit = (user: UserType) => {
-    NiceModal.show(ModalEditUser, user);
+
+    NiceModal.show(ModalEditUser, {user, updateUser})
+      .then(showModalInfoSuccess)
+      .catch(showModalInfoError)
+    ;
   };
 
   const showModalCreate = () => {

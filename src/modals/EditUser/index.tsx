@@ -1,18 +1,31 @@
-import React from 'react';
+import React, {FC} from 'react';
 import Modal from "../../components/Modal";
 import NiceModal, {useModal} from "@ebay/nice-modal-react";
-import UserForm from "../../components/UserForm";
 import {UserType} from "../../pages/Home";
+import UserForm, {FormType} from "components/UserForm";
 
-const ModalEditUser = () => {
-  const {visible, remove} = useModal()
+interface ModalEditUserProps {
+  user: UserType
+  updateUser: (user: UserType) => void
+}
+
+const ModalEditUser: FC<ModalEditUserProps> = ({user, updateUser}) => {
+  debugger
+  const {visible, remove, resolve, reject} = useModal()
 
   const onSuccess = (user: UserType) => {
-
+    updateUser(user)
+    resolve(user.name)
+    remove()
+  }
+  const onError= ()=> {
+    reject('This user not found')
+    remove()
   }
   return (
     <Modal isOpen={visible} close={remove}>
-      {/*<UserForm  defaultValue={user} />    */}
+      <button onClick={onError}>Show error</button>
+      <UserForm defaultValues={user} type={FormType.Edit} onSuccess={onSuccess}/>
     </Modal>
   );
 };

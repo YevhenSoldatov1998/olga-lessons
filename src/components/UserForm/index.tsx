@@ -48,22 +48,21 @@ const initialDefaultValue: Partial<UserType> = {
   email: '',
   hobbies: []
 }
-let render = 0
 const UserForm: FC<UserFormProps> = ({defaultValues = initialDefaultValue, onSuccess, type}) => {
-  render++
-  console.log("RENDER", render)
+
   const {handleSubmit, register, formState, watch, setValue} = useForm<UserType>({
     defaultValues,
     resolver: zodResolver(UserSchema)
   })
 
   const onSubmit = (data: UserType) => {
-    debugger
+    if (type === FormType.Edit && defaultValues.id) {
+      data.id = defaultValues.id
+    }
     onSuccess(data)
   }
 
   const hobbies = watch('hobbies') || []
-  console.log('HOBBIES', hobbies)
   return (
     <form onSubmit={handleSubmit(onSubmit)} className={cx('Form')}>
       <TextField label={'Name'} {...register('name')} error={formState.errors.name?.message}/>

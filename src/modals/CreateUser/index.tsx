@@ -3,7 +3,7 @@ import Modal from "../../components/Modal";
 import NiceModal, {useModal} from "@ebay/nice-modal-react";
 import UserForm, {FormType} from "components/UserForm";
 import {UserType} from "../../pages/Home";
-import {Typography} from "../../components/modules";
+import {Typography} from "components/modules";
 import {FontWeight, TypographyVariant} from "../../helpers/types";
 
 interface ModalCreateUserProps {
